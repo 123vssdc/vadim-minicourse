@@ -191,19 +191,6 @@ nav.scrolled{background:rgba(0,0,0,.85);backdrop-filter:blur(20px);padding:14px 
 .pk-btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.1);color:#fff}
 .pk-btn-ghost:hover{border-color:rgba(198,255,0,.3);color:var(--lime)}
 
-/* ═══ REVIEWS ═══ */
-#reviews{padding:120px 0;background:var(--g1);overflow:hidden}
-.reviews-track-wrap{overflow:hidden;margin:56px -40px 0}
-.reviews-track{display:flex;gap:16px;animation:reviewScroll 30s linear infinite}
-.reviews-track:hover{animation-play-state:paused}
-@keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.review-card{background:var(--g2);border:1px solid var(--border);border-radius:20px;padding:28px;width:320px;flex-shrink:0}
-.review-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,rgba(198,255,0,.2),rgba(198,255,0,.05));border:1px solid rgba(198,255,0,.2);display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:.9rem;color:var(--lime);margin-bottom:16px}
-.review-name{font-weight:700;font-size:.88rem;margin-bottom:4px}
-.review-role{font-size:.7rem;color:#333;margin-bottom:16px}
-.review-text{font-size:.82rem;color:#3a3a3a;line-height:1.6}
-.review-stars{color:var(--lime);font-size:.8rem;margin-top:12px;letter-spacing:2px}
-
 /* ═══ FAQ ═══ */
 #faq{padding:120px 0}
 .faq-list{margin-top:56px;display:flex;flex-direction:column;gap:2px}
@@ -569,31 +556,6 @@ footer span{color:var(--lime)}
         </div>
         <button class="pk-btn pk-btn-ghost" onclick="payMC('max')">Почати →</button>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ REVIEWS ═══ -->
-<section id="reviews">
-  <div class="container">
-    <div data-reveal><div class="section-tag"><span class="section-tag-text">Відгуки</span></div></div>
-    <h2 class="section-h" data-reveal data-delay="1">Що кажуть<br><span>учні курсу</span></h2>
-  </div>
-  <div class="reviews-track-wrap">
-    <div class="reviews-track" id="reviewsTrack">
-      <div class="review-card"><div class="review-avatar">О</div><div class="review-name">Олена К.</div><div class="review-role">Студентка, 21 рік</div><div class="review-text">Дуже доступно пояснено. Після курсу нарешті зрозуміла як взагалі працює реклама і де брати клієнтів.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">Д</div><div class="review-name">Дмитро Л.</div><div class="review-role">Фрілансер</div><div class="review-text">За тиждень після курсу знайшов першого клієнта. Вадим дає конкретику без води.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">А</div><div class="review-name">Анна М.</div><div class="review-role">Мама в декреті</div><div class="review-text">Нарешті зрозуміла з чого починати. Курс короткий але дуже насичений. Рекомендую всім хто хоче вийти в онлайн.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">М</div><div class="review-name">Максим В.</div><div class="review-role">Менеджер</div><div class="review-text">Хотів змінити роботу і не знав з чого почати. Після курсу вже розумію куди рухатись і що вчити далі.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">Ю</div><div class="review-name">Юлія С.</div><div class="review-role">SMM-початківець</div><div class="review-text">Пройшла за 3 вечори. Дуже зрозуміло і структуровано. Зараз вже веду перших клієнтів у соцмережах.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">В</div><div class="review-name">Вікторія Р.</div><div class="review-role">Дизайнер</div><div class="review-text">Хотіла додати маркетинг до своїх послуг. Курс допоміг зрозуміти весь ринок і як правильно продавати.</div><div class="review-stars">★★★★★</div></div>
-      <!-- duplicate for infinite scroll -->
-      <div class="review-card"><div class="review-avatar">О</div><div class="review-name">Олена К.</div><div class="review-role">Студентка, 21 рік</div><div class="review-text">Дуже доступно пояснено. Після курсу нарешті зрозуміла як взагалі працює реклама і де брати клієнтів.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">Д</div><div class="review-name">Дмитро Л.</div><div class="review-role">Фрілансер</div><div class="review-text">За тиждень після курсу знайшов першого клієнта. Вадим дає конкретику без води.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">А</div><div class="review-name">Анна М.</div><div class="review-role">Мама в декреті</div><div class="review-text">Нарешті зрозуміла з чого починати. Курс короткий але дуже насичений. Рекомендую всім хто хоче вийти в онлайн.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">М</div><div class="review-name">Максим В.</div><div class="review-role">Менеджер</div><div class="review-text">Хотів змінити роботу і не знав з чого почати. Після курсу вже розумію куди рухатись і що вчити далі.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">Ю</div><div class="review-name">Юлія С.</div><div class="review-role">SMM-початківець</div><div class="review-text">Пройшла за 3 вечори. Дуже зрозуміло і структуровано. Зараз вже веду перших клієнтів у соцмережах.</div><div class="review-stars">★★★★★</div></div>
-      <div class="review-card"><div class="review-avatar">В</div><div class="review-name">Вікторія Р.</div><div class="review-role">Дизайнер</div><div class="review-text">Хотіла додати маркетинг до своїх послуг. Курс допоміг зрозуміти весь ринок і як правильно продавати.</div><div class="review-stars">★★★★★</div></div>
     </div>
   </div>
 </section>
