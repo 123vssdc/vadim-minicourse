@@ -78,21 +78,21 @@ nav.scrolled{background:rgba(0,0,0,.85);backdrop-filter:blur(20px);padding:14px 
 
 /* ═══ HERO ═══ */
 #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-vid{position:absolute;inset:0;z-index:0}
+.hero-vid video{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-vid::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.93) 100%)}
+.hero-body{position:relative;z-index:1;max-width:680px}
 .hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(198,255,0,.08);border:1px solid rgba(198,255,0,.15);border-radius:100px;padding:6px 16px;margin-bottom:28px}
 .hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .hero-label-text{font-family:'Unbounded',sans-serif;font-size:.55rem;font-weight:700;color:var(--lime);letter-spacing:.1em;text-transform:uppercase}
-.hero-h{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:24px}
+.hero-h{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:24px;color:#fff}
 .hero-h span{color:var(--lime)}
-.hero-sub{font-size:1rem;color:#444;line-height:1.7;margin-bottom:40px;max-width:480px}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:40px;max-width:480px}
 .hero-badges{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
-.hero-badge{display:flex;align-items:center;gap:6px;font-size:.72rem;color:#333;font-weight:600}
+.hero-badge{display:flex;align-items:center;gap:6px;font-size:.72rem;color:rgba(255,255,255,.55);font-weight:600}
 .hero-badge-dot{width:4px;height:4px;border-radius:50%;background:var(--lime)}
-.hero-canvas-wrap{position:relative;height:500px;display:flex;align-items:center;justify-content:center;border-radius:24px;overflow:hidden;border:1px solid var(--border)}
-.hero-canvas-wrap video{width:100%;height:100%;object-fit:cover}
-.hero-canvas-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.35) 100%);pointer-events:none}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-canvas-wrap{height:300px}}
+@media(max-width:900px){.hero-body{max-width:100%}}
 
 /* ═══ PROBLEM ═══ */
 #problem{padding:120px 0;background:var(--g1)}
@@ -295,25 +295,23 @@ footer span{color:var(--lime)}
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
+  <div class="hero-vid">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="hero.mov" type="video/mp4">
+    </video>
+  </div>
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-label" data-reveal><span class="hero-label-dot"></span><span class="hero-label-text">Міні-курс · 7 уроків</span></div>
-        <h1 class="hero-h" data-reveal data-delay="1">Освой інтернет-<span>маркетинг</span> з нуля та заробляй перші <span>$1000</span> онлайн</h1>
-        <p class="hero-sub" data-reveal data-delay="2">За кілька вечорів ти розберешся, як створюють сайти, запускають рекламу, знаходять клієнтів та отримують перші замовлення.</p>
-        <div class="hero-badges" data-reveal data-delay="3">
-          <div class="hero-badge"><span class="hero-badge-dot"></span>7 коротких уроків</div>
-          <div class="hero-badge"><span class="hero-badge-dot"></span>Від нуля до першого доходу</div>
-          <div class="hero-badge"><span class="hero-badge-dot"></span>Доступ назавжди</div>
-        </div>
-        <div data-reveal data-delay="4">
-          <a href="#pricing" class="btn btn-lime">Почати навчання →</a>
-        </div>
+    <div class="hero-body">
+      <div class="hero-label" data-reveal><span class="hero-label-dot"></span><span class="hero-label-text">Міні-курс · 7 уроків</span></div>
+      <h1 class="hero-h" data-reveal data-delay="1">Освой інтернет-<span>маркетинг</span> з нуля та заробляй перші <span>$1000</span> онлайн</h1>
+      <p class="hero-sub" data-reveal data-delay="2">За кілька вечорів ти розберешся, як створюють сайти, запускають рекламу, знаходять клієнтів та отримують перші замовлення.</p>
+      <div class="hero-badges" data-reveal data-delay="3">
+        <div class="hero-badge"><span class="hero-badge-dot"></span>7 коротких уроків</div>
+        <div class="hero-badge"><span class="hero-badge-dot"></span>Від нуля до першого доходу</div>
+        <div class="hero-badge"><span class="hero-badge-dot"></span>Доступ назавжди</div>
       </div>
-      <div class="hero-canvas-wrap" data-reveal data-delay="2">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="hero.mov" type="video/mp4">
-        </video>
+      <div data-reveal data-delay="4">
+        <a href="#pricing" class="btn btn-lime">Почати навчання →</a>
       </div>
     </div>
   </div>
