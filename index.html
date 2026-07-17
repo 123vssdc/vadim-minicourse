@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Міні-курс з інтернет-маркетингу — Вадим Магерко</title>
+<meta name="description" content="Освой інтернет-маркетинг з нуля та зроби перші кроки до $1000 онлайн. Практичний міні-курс від 149₴.">
+<meta property="og:title" content="Міні-курс з інтернет-маркетингу — Вадим Магерко">
+<meta property="og:description" content="Освой інтернет-маркетинг з нуля та зроби перші кроки до $1000 онлайн.">
+<meta property="og:type" content="website">
+<script>
+// ===== Meta Pixel =====
+// Встав свій Pixel ID нижче (Ads Manager → Events Manager → Data Sources).
+window.FB_PIXEL_ID = '';
+if (window.FB_PIXEL_ID) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', window.FB_PIXEL_ID);
+  fbq('track', 'PageView');
+}
+function trackFB(event, params){
+  if (window.FB_PIXEL_ID && window.fbq) fbq('track', event, params || {});
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -441,7 +458,7 @@ footer span{color:var(--lime)}
           <div class="pk-feat"><div class="pk-check">✓</div>Доступ назавжди</div>
           <div class="pk-feat"><div class="pk-check">✓</div>Підходить для знайомства з темою</div>
         </div>
-        <button class="pk-btn pk-btn-ghost">Почати →</button>
+        <button class="pk-btn pk-btn-ghost" onclick="payMC('start')">Почати →</button>
       </div>
       <div class="pkg pkg-featured" data-reveal data-delay="1">
         <div class="pk-badge">⭐ Найпопулярніший</div>
@@ -455,7 +472,7 @@ footer span{color:var(--lime)}
           <div class="pk-feat"><div class="pk-check">✓</div>Доступ назавжди</div>
           <div class="pk-feat"><div class="pk-check">✓</div>План виходу на $1000</div>
         </div>
-        <button class="pk-btn pk-btn-dark">Почати →</button>
+        <button class="pk-btn pk-btn-dark" onclick="payMC('standard')">Почати →</button>
       </div>
       <div class="pkg" data-reveal data-delay="2">
         <div class="pk-badge">Преміум</div>
@@ -469,7 +486,7 @@ footer span{color:var(--lime)}
           <div class="pk-feat"><div class="pk-check">✓</div>Текстова підтримка</div>
           <div class="pk-feat"><div class="pk-check">✓</div>Доступ назавжди</div>
         </div>
-        <button class="pk-btn pk-btn-ghost">Почати →</button>
+        <button class="pk-btn pk-btn-ghost" onclick="payMC('max')">Почати →</button>
       </div>
     </div>
   </div>
@@ -725,6 +742,47 @@ function toggleFaq(btn){
   }
   setTimeout(show,8000+Math.random()*5000);
 })();
+
+/* ===== Оплата міні-курсу через WayForPay ===== */
+async function payMC(pkg){
+  try{
+    const r = await fetch(`/api/sign?pkg=${pkg}`);
+    if(!r.ok) throw new Error('Сервер повернув помилку: ' + r.status);
+    const data = await r.json();
+    if(data.error) throw new Error(data.error);
+
+    trackFB('InitiateCheckout', { value: data.amount, currency: 'UAH', content_name: pkg });
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://secure.wayforpay.com/pay';
+
+    const fields = {
+      merchantAccount:    data.merchantAccount,
+      merchantDomainName: data.merchantDomainName,
+      orderReference:     data.orderReference,
+      orderDate:          String(data.orderDate),
+      amount:             String(data.amount),
+      currency:           'UAH',
+      productName:        data.productName[0],
+      productCount:       '1',
+      productPrice:       String(data.productPrice[0]),
+      merchantSignature:  data.merchantSignature,
+      language:           'UA',
+      returnUrl:          location.origin + '/dyakuyu.html?txn=' + encodeURIComponent(data.orderReference),
+    };
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden'; input.name = name; input.value = value;
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+  }catch(e){
+    console.error('WFP error', e);
+    alert('Помилка при відкритті форми оплати:\n' + e.message);
+  }
+}
 </script>
 </body>
 </html>

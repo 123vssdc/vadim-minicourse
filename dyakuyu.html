@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дякуємо за оплату — Міні-курс з інтернет-маркетингу</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#c6ff00;--black:#000;--muted:rgba(255,255,255,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:#fff;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.box{max-width:460px;width:100%;text-align:center;background:#0d0d0d;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:48px 36px}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:1.5rem;margin-bottom:14px}
+p{color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:28px}
+.mark{width:64px;height:64px;border-radius:50%;background:var(--lime);color:#000;font-family:'Unbounded',sans-serif;font-weight:900;font-size:1.6rem;display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Unbounded',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.05em;padding:17px 34px;border-radius:100px;text-decoration:none;background:var(--lime);color:#000;border:none;transition:transform .2s}
+.btn:hover{transform:scale(1.05)}
+.spinner{width:30px;height:30px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--lime);border-radius:50%;margin:0 auto 22px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hidden{display:none}
+.fail{color:#ff6b6b}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+  <div class="spinner" id="spinner"></div>
+  <div class="mark hidden" id="mark">✓</div>
+  <h1 class="hidden" id="title"></h1>
+  <p id="sub">Перевіряємо оплату — це займає кілька секунд…</p>
+  <a class="btn hidden" id="btn" href="#" target="_blank">Відкрити бота і отримати доступ →</a>
+</div>
+<script>
+// BOT_USERNAME — встав сюди юзернейм нового бота, коли створиш його через @BotFather
+const BOT_USERNAME = 'ВСТАВ_ЮЗЕРНЕЙМ_БОТА';
+
+const txn = new URLSearchParams(location.search).get('txn') || '';
+
+function showResult(found, tariff) {
+  document.getElementById('spinner').classList.add('hidden');
+  document.getElementById('mark').classList.remove('hidden');
+  document.getElementById('title').classList.remove('hidden');
+  if (found) {
+    document.getElementById('title').textContent = 'Оплата пройшла успішно!';
+    document.getElementById('sub').textContent = 'Натисни кнопку нижче, щоб бот одразу відкрив тобі уроки.';
+    const btn = document.getElementById('btn');
+    btn.href = `https://t.me/${BOT_USERNAME}?start=${encodeURIComponent(txn)}`;
+    btn.classList.remove('hidden');
+  } else {
+    document.getElementById('mark').textContent = '!';
+    document.getElementById('mark').style.background = '#ff6b6b';
+    document.getElementById('title').textContent = 'Оплату не підтверджено';
+    document.getElementById('title').classList.add('fail');
+    document.getElementById('sub').textContent = 'Якщо банк списав кошти — це тимчасово, спробуй оновити сторінку за хвилину. Якщо оплата не пройшла — спробуй ще раз або напиши нам.';
+  }
+}
+
+async function poll(tries) {
+  if (!txn) { showResult(false); return; }
+  try {
+    const r = await fetch('/api/paycheck?txn=' + encodeURIComponent(txn));
+    const data = await r.json();
+    if (data.found) { showResult(true, data.tariff); return; }
+  } catch (e) {}
+  if (tries > 20) { showResult(false); return; }
+  setTimeout(() => poll(tries + 1), tries === 0 ? 1500 : 3000);
+}
+poll(0);
+</script>
+</body>
+</html>
