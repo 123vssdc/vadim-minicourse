@@ -225,6 +225,60 @@ nav.scrolled{background:rgba(0,0,0,.85);backdrop-filter:blur(20px);padding:14px 
 /* FOOTER */
 footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;font-size:.75rem;color:#222}
 footer span{color:var(--lime)}
+
+/* CASES / STUDENT STORIES — той самий блок, що на основному сайті marketolog-45 */
+#cases{padding:140px 0;background:var(--g1)}
+#cases .container{max-width:1360px}
+.cases-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:24px}
+.cases-count-big{font-family:'Unbounded',sans-serif;font-size:6rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+.cases-intro{color:#555;font-size:.98rem;line-height:1.75;max-width:760px;margin-bottom:64px}
+
+.stories-featured{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.story-card{display:flex;flex-direction:column;background:var(--g2);border:1px solid var(--border);border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .3s,transform .3s}
+.story-card:hover{border-color:rgba(198,255,0,.3);transform:translateY(-4px)}
+
+.story-photo{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(circle at 50% 35%,#1c1c1c,#050505 72%);flex-shrink:0}
+.story-card--compact .story-photo{aspect-ratio:5/4}
+.story-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.story-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 25%,transparent 65%,rgba(0,0,0,.65) 100%)}
+.story-income{position:absolute;top:16px;right:16px;z-index:2;background:var(--lime);color:#000;font-family:'Unbounded',sans-serif;font-size:.72rem;font-weight:900;padding:6px 14px;border-radius:100px}
+.story-video-badge{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.75);border:1px solid rgba(198,255,0,.25);color:var(--lime);font-family:'Unbounded',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.03em;padding:6px 12px;border-radius:100px}
+.story-play{position:absolute;bottom:16px;right:16px;z-index:2;width:44px;height:44px;border-radius:50%;background:var(--lime);color:#000;display:flex;align-items:center;justify-content:center;font-size:1.05rem;transition:transform .25s}
+.story-card:hover .story-play{transform:scale(1.12)}
+
+.story-body{padding:28px;display:flex;flex-direction:column;flex:1}
+.story-name{font-family:'Unbounded',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:14px}
+.story-name .story-age{color:#444;font-weight:500;font-size:.9rem}
+.story-hook{font-weight:600;font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:16px;line-height:1.4}
+.story-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.story-bullets li{position:relative;padding-left:22px;font-size:.85rem;color:#666;line-height:1.5}
+.story-bullets li::before{content:'✓';position:absolute;left:0;top:0;color:var(--lime);font-weight:700;font-size:.8rem}
+.story-text{font-size:.85rem;color:#444;line-height:1.65;margin-bottom:20px}
+.story-card--compact .story-text{margin-bottom:16px;font-size:.82rem}
+.story-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.story-badge{font-size:.68rem;font-weight:600;color:#555;border:1px solid #222;padding:5px 12px;border-radius:100px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.story-cta{font-family:'Unbounded',sans-serif;font-size:.68rem;font-weight:700;color:var(--lime);white-space:nowrap;transition:opacity .2s}
+.story-card:hover .story-cta{opacity:.7}
+
+.story-card--novideo{cursor:default}
+.story-card--novideo:hover{border-color:var(--border);transform:none}
+.story-cta--soon{color:#555}
+
+.cases-disclaimer{display:flex;align-items:flex-start;gap:14px;background:rgba(198,255,0,.03);border:1px solid rgba(198,255,0,.1);border-radius:16px;padding:22px 26px;margin-top:40px;font-size:.85rem;color:#555;line-height:1.65}
+.cases-disclaimer span{flex-shrink:0;font-size:1.1rem}
+
+@media (max-width:900px){
+  .stories-featured,.stories-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .cases-header{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:40px}
+  .cases-count-big{font-size:3rem}
+  .stories-featured,.stories-grid{grid-template-columns:1fr}
+  .cases-intro{margin-bottom:40px}
+  .story-body{padding:22px}
+}
 </style>
 </head>
 <body>
@@ -441,6 +495,28 @@ footer span{color:var(--lime)}
   </div>
 </section>
 
+<!-- ═══ CASES / STUDENT STORIES ═══ -->
+<section id="cases">
+  <div class="container">
+    <div class="cases-header">
+      <div>
+        <div data-reveal><div class="chip">🎥 Відео-історії</div></div>
+        <h2 class="u7" data-reveal data-delay="1" style="font-size:clamp(2.5rem,5.5vw,4.5rem)">Історії учнів, які<br><span class="lime">вже пройшли цей шлях</span></h2>
+      </div>
+      <div class="cases-count-big" data-reveal>13</div>
+    </div>
+    <p class="cases-intro" data-reveal data-delay="2">У кожного був свій старт: хтось прийшов з нуля, хтось хотів змінити сферу, хтось уже щось пробував сам. Нижче — відеоінтерв'ю з учнями, які пройшли навчання і поділились своїм досвідом чесно, своїми словами.</p>
+
+    <div class="stories-featured" id="storiesFeatured"></div>
+    <div class="stories-grid" id="storiesGrid"></div>
+
+    <div class="cases-disclaimer" data-reveal>
+      <span>ℹ️</span>
+      <div>Це реальні історії учнів курсу наставництва Вадима. Міні-курс — перший крок у цю ж систему.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ PRICING ═══ -->
 <section id="pricing">
   <div class="container">
@@ -594,6 +670,162 @@ document.querySelectorAll('a,button,.pkg,.tl-item,.forwho-item,.result-item').fo
   el.addEventListener('mouseleave',()=>{ring.style.width='40px';ring.style.height='40px';ring.style.opacity='1'});
 });
 
+/* STUDENT STORIES — той самий блок/дані, що на основному сайті marketolog-45 */
+const studentStories=[
+  {
+    featured:true,
+    name:"Василь",age:26,
+    photo:"students/vasyl.jpg",
+    income:"$3,000/міс",
+    badge:"12 днів окупність",
+    hook:"Окупив навчання ще до кінця першого місяця потоку",
+    bullets:[
+      "Пройшов повну практичну програму курсу",
+      "Окупив навчання вже на 12-й день потоку",
+      "Дохід від маркетингу ≈ $3,000/міс"
+    ],
+    story:"Один із перших результатів на потоці — Василь окупив курс уже на 12-й день навчання. Дохід від маркетингу дозволив придбати авто.",
+    youtube:"https://www.youtube.com/watch?v=uECs-ta07bY"
+  },
+  {
+    featured:true,
+    name:"Софія",age:20,
+    photo:"students/sofia.jpg",
+    income:"$1,500/міс",
+    badge:"7 клієнтів",
+    hook:"Знайшла перших клієнтів ще під час навчання",
+    bullets:[
+      "Веде 7 клієнтів, середній чек від $500",
+      "Перші $1,000+ заробила ще в процесі навчання",
+      "Дохід від маркетингу ≈ $1,500/міс"
+    ],
+    story:"Софія почала з нуля і вже під час навчання закрила перших клієнтів. Сьогодні веде 7 клієнтів з чеком від $500 і продовжує рости.",
+    youtube:"https://www.youtube.com/watch?v=zqcpqOEHckY"
+  },
+  {
+    featured:true,
+    name:"Влад",age:20,
+    photo:"students/vlad.jpg",
+    income:"$2,000/міс",
+    badge:"Звільнився",
+    hook:"Звільнився з найманої роботи після курсу",
+    bullets:[
+      "Закрив клієнтів на $1,500 і на $500",
+      "Прийняв рішення піти з найманої роботи",
+      "Дохід від маркетингу ≈ $2,000/міс"
+    ],
+    story:"Після курсу Влад закрив двох клієнтів — на $1,500 і на $500 — і вирішив піти з найманої роботи, щоб працювати на себе.",
+    youtube:"https://www.youtube.com/watch?v=nB3gA3lxsNw"
+  },
+  {
+    name:"Юра",age:20,
+    photo:"students/yura.jpg",
+    income:"$1,500/міс",
+    badge:"iPhone для мами",
+    story:"Був доставщиком піци. Через 2 місяці навчання дохід від маркетингу дозволив подарувати мамі iPhone.",
+    youtube:"https://www.youtube.com/watch?v=xlnxVwbB97U"
+  },
+  {
+    name:"Руслан",age:20,
+    photo:"students/ruslan.jpg",
+    income:"$2,000/міс",
+    badge:"7-й день",
+    story:"Працював у МакДональдс. Закрив першого клієнта вже на 7-й день навчання.",
+    youtube:"https://www.youtube.com/watch?v=5z8b6xxdxKc"
+  },
+  {
+    name:"Іванна",age:20,
+    photo:"students/ivanna.jpg",
+    income:"$2,000/міс",
+    badge:"1.5 місяці",
+    story:"До цього проходила інші курси без результату. За 1.5 місяця навчання у Вадима вийшла на дохід ≈ $2,000/міс.",
+    youtube:"https://www.youtube.com/watch?v=3govrFfl6aM"
+  },
+  {
+    name:"Ірина",age:25,
+    photo:"students/iryna.jpg",
+    income:"$1,000/міс",
+    badge:"Нова сфера",
+    story:"Була менеджеркою блогерів. Додала маркетинг як ще одну сферу заробітку — плюс $1,000/міс.",
+    youtube:"https://www.youtube.com/watch?v=oH0HJFQRIN8"
+  },
+  {
+    name:"Анастасія",age:20,
+    photo:"students/anastasia.jpg",
+    income:"$500/міс",
+    badge:"2 клієнти",
+    story:"Веде 2 закордонних клієнти, налаштовує таргет віддалено — $500/міс.",
+    youtube:"https://www.youtube.com/watch?v=EBig39g-kXY"
+  },
+  {
+    name:"Тарас",age:18,
+    photo:"students/taras.jpg",
+    income:"$1,500/міс",
+    badge:"Сам на себе",
+    story:"Пробував розбиратись сам, але без результату. Після навчання вийшов на $1,500/міс, працюючи на себе.",
+    youtube:"https://www.youtube.com/watch?v=FqH8DkFAnvg"
+  },
+  {
+    name:"Ярослав",age:23,
+    photo:"students/yaroslav.jpg",
+    income:"$3,000/міс",
+    badge:"Новий ноутбук",
+    story:"Почав з нуля. Після навчання купив новий телефон і ноутбук, закрив проєкт одним чеком на €2,000.",
+    youtube:null
+  },
+  {
+    name:"Алекс",age:18,
+    photo:"students/alex.jpg",
+    income:"$5,000+/міс",
+    badge:"Переїхав у столицю",
+    story:"Працював на будівництві. Почав працювати на себе в маркетингу і переїхав у столицю.",
+    youtube:null
+  },
+  {
+    name:"Богдан",age:20,
+    photo:"students/bohdan.jpg",
+    income:"$2,000+/міс",
+    badge:"iPhone для мами",
+    story:"Почав працювати на себе в маркетингу, подарував мамі новий iPhone і змінив своє життя.",
+    youtube:null
+  }
+];
+
+(function renderStories(){
+  const featuredWrap=document.getElementById('storiesFeatured');
+  const gridWrap=document.getElementById('storiesGrid');
+  if(!featuredWrap||!gridWrap)return;
+  studentStories.forEach((s,i)=>{
+    const hasVideo=!!s.youtube;
+    const card=document.createElement(hasVideo?'a':'div');
+    if(hasVideo){ card.href=s.youtube; card.target='_blank'; card.rel='noopener noreferrer'; }
+    card.className='story-card '+(s.featured?'story-card--featured':'story-card--compact')+(hasVideo?'':' story-card--novideo');
+    card.setAttribute('aria-label',hasVideo?"Дивитись інтерв'ю з "+s.name:"Історія учня "+s.name);
+    card.setAttribute('data-reveal','');
+    card.setAttribute('data-delay',String((i%3)+1));
+    card.innerHTML=
+      '<div class="story-photo">'+
+        '<img src="'+s.photo+'" alt="Фото учня '+s.name+'" loading="lazy">'+
+        (hasVideo?'<span class="story-video-badge">🎥 Відео-історія</span>':'')+
+        '<span class="story-income">'+s.income+'</span>'+
+        (hasVideo?'<span class="story-play">▶</span>':'')+
+      '</div>'+
+      '<div class="story-body">'+
+        '<div class="story-name">'+s.name+'<span class="story-age">, '+s.age+'</span></div>'+
+        (s.featured?
+          '<div class="story-hook">'+s.hook+'</div>'+
+          '<ul class="story-bullets">'+s.bullets.map(b=>'<li>'+b+'</li>').join('')+'</ul>'
+          :'')+
+        '<p class="story-text">'+s.story+'</p>'+
+        '<div class="story-footer">'+
+          '<span class="story-badge">'+s.badge+'</span>'+
+          (hasVideo?'<span class="story-cta">'+(s.featured?"Дивитись інтерв'ю":"Відео")+' →</span>':'<span class="story-cta story-cta--soon">Свіжий випуск</span>')+
+        '</div>'+
+      '</div>';
+    (s.featured?featuredWrap:gridWrap).appendChild(card);
+  });
+})();
+
 /* NAV */
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60),{passive:true});
 
@@ -709,38 +941,6 @@ function toggleFaq(btn){
   initNodes();
   draw();
   window.addEventListener('resize',()=>{resize();initNodes();});
-})();
-
-/* SOCIAL PROOF */
-(()=>{
-  const events=[
-    {name:'Олена',age:22,action:'щойно придбала курс Стандарт'},
-    {name:'Дмитро',age:27,action:'щойно придбав курс Базовий'},
-    {name:'Анна',age:20,action:'щойно придбала курс Максимум'},
-    {name:'Максим',age:25,action:'щойно розпочав навчання'},
-    {name:'Вікторія',age:23,action:'щойно придбала курс Стандарт'},
-    {name:'Артем',age:28,action:'щойно придбав курс Базовий'},
-    {name:'Юлія',age:21,action:'щойно розпочала навчання'},
-    {name:'Богдан',age:26,action:'щойно придбав курс Максимум'},
-  ];
-  const el=document.createElement('div');
-  el.id='sp-popup';
-  el.innerHTML=`<div id="sp-inner"><div id="sp-avatar"></div><div id="sp-text"><div id="sp-name"></div><div id="sp-action"></div></div><div>🔥</div></div>`;
-  document.body.appendChild(el);
-  const s=document.createElement('style');
-  s.textContent=`#sp-popup{position:fixed;bottom:28px;left:24px;z-index:9999;pointer-events:none}#sp-inner{display:flex;align-items:center;gap:12px;background:rgba(13,13,13,.97);border:1px solid rgba(198,255,0,.18);border-radius:16px;padding:12px 16px 12px 12px;box-shadow:0 8px 32px rgba(0,0,0,.5);backdrop-filter:blur(20px);max-width:280px;transform:translateY(20px) scale(.95);opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1)}#sp-inner.show{transform:translateY(0) scale(1);opacity:1}#sp-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(198,255,0,.2),rgba(198,255,0,.05));border:1.5px solid rgba(198,255,0,.25);display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:1rem;color:#c6ff00;flex-shrink:0}#sp-text{flex:1}#sp-name{font-weight:700;font-size:.82rem;color:#fff;margin-bottom:2px}#sp-action{font-size:.73rem;color:#555}`;
-  document.head.appendChild(s);
-  let idx=Math.floor(Math.random()*events.length);
-  function show(){
-    const ev=events[idx%events.length];idx++;
-    const inner=document.getElementById('sp-inner');
-    document.getElementById('sp-avatar').textContent=ev.name[0];
-    document.getElementById('sp-name').textContent=ev.name+', '+ev.age+' р.';
-    document.getElementById('sp-action').textContent=ev.action;
-    inner.classList.add('show');
-    setTimeout(()=>{inner.classList.remove('show');setTimeout(show,6000+Math.random()*6000);},4500);
-  }
-  setTimeout(show,8000+Math.random()*5000);
 })();
 
 /* ===== Оплата міні-курсу через WayForPay ===== */
